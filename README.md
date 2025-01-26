@@ -5,7 +5,6 @@ This repository demonstrates a complete data pipeline using **Apache Kafka**, **
 ## Prerequisites
 Make sure the following dependencies are installed:
 - Docker
-- Make
 - Jupyter (for local development and testing)
 - PostgreSQL
 - Kafka
@@ -86,11 +85,11 @@ Events are produced and sent to a Kafka topic for further processing.
 
 The Streaming Job performs the following tasks:
 
-### Listens to the Kafka topic:
+### 1. Listens to the Kafka topic:
 
 The Spark Structured Streaming job listens for incoming purchase events from the Kafka topic.
 
-### Aggregates purchase data:
+### 2. Aggregates purchase data:
 
 Every 5 minutes, Spark will aggregate total purchases for each category and payment method. The aggregation includes:
 
@@ -102,11 +101,11 @@ Every 5 minutes, Spark will aggregate total purchases for each category and paym
 | `total_quantity`     | The total quantity of products purchased in the aggregated window.    |
 | `total_amount`       | The total amount spent (quantity * price).                            |
 
-### Handles Late Data:
+### 3. Handles Late Data:
 
 The system is configured to **allow late data (up to 1 hour)** using Spark's watermarking feature. This ensures that even if data arrives later than expected, it will still be processed correctly.
 
-### Writes aggregated data to the console:
+### 4. Writes aggregated data to the console:
 
 After aggregation, the job outputs the following columns to the console:
 
