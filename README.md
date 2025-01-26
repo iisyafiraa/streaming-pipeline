@@ -94,15 +94,13 @@ The Spark Structured Streaming job listens for incoming purchase events from the
 
 Every 5 minutes, Spark will aggregate total purchases for each category and payment method. The aggregation includes:
 
-```bash
-category
-payment_method
-avg_price
-total_quantity
-total_amount
-running_total
-timestamp
-```
+| **Column Name**      | **Description**                                                       |
+|----------------------|-----------------------------------------------------------------------|
+| `category`           | The category of the product purchased.                                |
+| `payment_method`     | The method of payment used for the transaction.                       |
+| `avg_price`          | The average price for the category and payment method.                |
+| `total_quantity`     | The total quantity of products purchased in the aggregated window.    |
+| `total_amount`       | The total amount spent (quantity * price).                            |
 
 ### Handles Late Data:
 
@@ -112,10 +110,22 @@ The system is configured to **allow late data (up to 1 hour)** using Spark's wat
 
 After aggregation, the job outputs the following columns to the console:
 
-```bash
-Timestamp: The timestamp of the aggregation.
-Daily Running Total: The running total of the total_amount up to the current timestamp.
-```
+| **Column Name**      | **Description**                                                       |
+|----------------------|-----------------------------------------------------------------------|
+| `running_total`      | The running total of the total_amount up to the current timestamp.    |
+| `timestamp`          | The timestamp of the aggregation (when the aggregation was computed). |
+
+So, the result in retail table is like this:
+
+| **Column Name**      | **Description**                                                       |
+|----------------------|-----------------------------------------------------------------------|
+| `category`           | The category of the product purchased.                                |
+| `payment_method`     | The method of payment used for the transaction.                       |
+| `avg_price`          | The average price for the category and payment method.                |
+| `total_quantity`     | The total quantity of products purchased in the aggregated window.    |
+| `total_amount`       | The total amount spent (quantity * price).                            |
+| `running_total`      | The running total of the total_amount up to the current timestamp.    |
+| `timestamp`          | The timestamp of the aggregation (when the aggregation was computed). |
 
 The aggregation is **performed every 5 minutes** (as defined by the trigger interval). This ensures that the system processes and outputs the total purchase data at regular intervals.
 Late data handling is crucial in this pipeline. Spark allows for late data to be processed, even if the events are delayed by up to 1 hour. This is managed by using watermarks on the timestamp column.
