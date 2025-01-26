@@ -63,17 +63,19 @@ This will start the Spark job which listens to the Kafka topic, processes the in
 
 The Event Producer **generates purchasing events**. It simulates purchases with the following attributes:
 
-```bash
-transaction_id: Unique identifier for each transaction.
-customer_id: Identifier for the customer making the purchase.
-category: The category of the product purchased (e.g., Skincare, Makeup).
-brand: The brand of the product.
-product_name: The name of the product.
-quantity: Number of items purchased.
-price: Price per unit of the product.
-payment_method: Payment method used (e.g., Credit Card, PayPal).
-timestamp (ts): The timestamp of the event.
-```
+| **Column Name**      | **Description**                                                       |
+|----------------------|-----------------------------------------------------------------------|
+| `transaction_id`     | Unique identifier for each transaction.                              |
+| `customer_id`        | Identifier for the customer making the purchase.                     |
+| `category`           | The category of the product purchased (e.g., Skincare, Makeup).      |
+| `brand`              | The brand of the product.                                            |
+| `product_name`       | The name of the product.                                             |
+| `quantity`           | Number of items purchased.                                           |
+| `price`              | Price per unit of the product.                                       |
+| `payment_method`     | Payment method used (e.g., Credit Card, PayPal).                     |
+| `timestamp (ts)`     | The timestamp of the event.                                          |
+
+---
 
 ### Key Considerations:
 
